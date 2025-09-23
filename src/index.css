@@ -70,7 +70,10 @@ button:focus-visible {
 :root {
   --text-primary-color: #FAFAF9;
   --link-color: #263FA9;
-  --border-button-color: #263FA9;
+  --bg-hover-color: #F8FAFC1A;
+  --border-form-color: #263FA9;
+  --border-input-color: #F8FAFC1A;
+  --bg-form-color: #030616;
   --bg-input-color: #030616;
   --bg-button-color: #263FA9;
   --bg-qr-code-color: #F2F5F9;

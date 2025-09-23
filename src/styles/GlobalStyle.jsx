@@ -17,6 +17,10 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
     }
 
+    p {
+        margin: 0;
+    }
+
     @media ( max-width: 40rem ) {
         body {
             background: url(${qaBgSmall}) no-repeat center;

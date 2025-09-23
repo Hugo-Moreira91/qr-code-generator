@@ -15,6 +15,7 @@ const FooterContainer = styled.footer`
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: .75rem 0;
 
     p {
         color: var(--text-primary-color);
