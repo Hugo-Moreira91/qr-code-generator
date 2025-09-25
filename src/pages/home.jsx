@@ -1,14 +1,50 @@
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import isUrlHttp from "is-url-http";
 
 const Home = () => {
+  const [url, setUrl] = useState("");
+  const [urlError, setUrlError] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!url.trim()) {
+      setUrlError(null);
+    }
+  }, [url]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setUrlError(null);
+
+    const urlNormalized = url.trim();
+
+    const checkUrl = isUrlHttp(urlNormalized);
+
+    console.log(checkUrl)
+
+    if(checkUrl) {
+      navigate("/qr");
+    } else {
+      setUrlError('URL is not valid');
+    }
+  };
+
   return (
     <HomeContainer>
       <img src={`${logo}`} alt="QRCODE's logo" />
-      <form>
-        <input type="text" name="" id="" placeholder="Enter an url" />
+      <form onSubmit={handleSubmit}>
+        <input 
+          type="text"
+          placeholder="Enter an url"
+          value={url}
+          onChange={e => setUrl(e.target.value)}
+        />
         <button type="submit">QR code</button>
       </form>
+      {urlError && <span>{urlError}</span>}
     </HomeContainer>
   );
 };
@@ -72,6 +108,13 @@ const HomeContainer = styled.div`
     button[type="submit"]:hover {
       background-color: var(--bg-hover-color);
     }
+  }
+
+  span {
+    font-size: .85rem;
+    font-style: italic;
+    margin-top: .15rem;
+    color: var(--text-error-color);
   }
 
   @media ( max-width: 40rem ) {

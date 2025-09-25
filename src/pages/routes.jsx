@@ -8,7 +8,7 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/qrcodegenerated" element={<QrCode />} />
+        <Route path="/qr" element={<QrCode />} />
       </Routes>
       <Footer />
     </BrowserRouter>
