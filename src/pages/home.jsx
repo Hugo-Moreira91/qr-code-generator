@@ -25,7 +25,7 @@ const Home = () => {
 
     if(checkUrl) {
       setUrl(urlNormalized);
-      navigate("/qr");
+      navigate("/qr", { state: { url } });
     } else {
       setUrlError('URL is not valid');
     }
@@ -90,22 +90,9 @@ const HomeContainer = styled.div`
     }
 
     button[type="submit"] {
-      font-family: var(--text-font);
-      font-weight: 400;
-      font-size: 1rem;
       letter-spacing: .005rem;
       width: 8.75rem;
       height: 3.25rem;
-      background-color: var(--bg-button-color);
-      color: var(--text-primary-color);
-      border: none;
-      border-radius: .85rem;
-      cursor: pointer;
-      transition: all 250ms ease-in;
-    }
-
-    button[type="submit"]:hover {
-      background-color: var(--bg-hover-color);
     }
   }
 

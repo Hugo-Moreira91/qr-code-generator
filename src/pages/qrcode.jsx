@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { QRCodeSVG } from "qrcode.react";
 import logoSmall from "../assets/logo-small.svg";
 import loadCircleDuotone from "../assets/load_circle_duotone.svg";
@@ -6,7 +6,19 @@ import linkAlt from "../assets/link_alt.svg";
 import styled from "styled-components";
 
 const QrCode = () => {
-  const { url } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const url = location.state?.url;
+
+  if (!url) {
+    return (
+      <NoUrlContainer>
+        <p>No url provided</p>
+        <button type="button" onClick={() => navigate("/")}>Back</button>
+      </NoUrlContainer>
+    );
+  }
 
   return (
     <>
@@ -40,6 +52,23 @@ const QrCode = () => {
     </>
   );
 };
+
+const NoUrlContainer = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding-top: 4rem;
+
+  p {
+    color: var(--text-primary-color);
+  }
+
+  button[type="button"] {
+    padding: .5rem 1rem;
+  }
+`
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -85,24 +114,11 @@ const ButtonsContainer = styled.div`
   margin-top: 6rem;
 
   button[type="button"] {
-    font-family: var(--text-font);
-    font-size: 1rem;
-    font-weight: 400;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: .75rem;
-    background-color: var(--bg-button-color);
-    color: var(--text-primary-color);
     padding: 1rem 2.45rem;
-    border: none;
-    border-radius: .75rem;
-    cursor: pointer;
-    transition: all 250ms ease-in;
-  }
-
-  button[type="button"]:hover {
-      background-color: var(--bg-hover-color);
   }
 
   @media (max-width: 40rem) {
