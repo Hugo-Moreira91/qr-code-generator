@@ -20,6 +20,29 @@ const QrCode = () => {
     );
   }
 
+  const handleDownload = () => {
+    const svg = document.querySelector("#qrcode");
+    
+    if (!svg) {
+      alert("SVG not found!");
+      return;
+    }
+
+    const svgData = new XMLSerializer().serializeToString(svg);
+
+    const blob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+    const urlBlob = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = urlBlob;
+    link.download = "qrcode.svg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(urlBlob);
+  };
+
   return (
     <>
     <HeaderContainer>
@@ -29,7 +52,8 @@ const QrCode = () => {
     </HeaderContainer>
     <QRCodeContainer>
       <QRCodeWrapper>
-        <QRCodeSVG 
+        <QRCodeSVG
+          id="qrcode"
           value={url} 
           size={185} 
           fgColor={"#111629"} 
@@ -39,7 +63,7 @@ const QrCode = () => {
         />
       </QRCodeWrapper>
       <ButtonsContainer>
-        <button type="button">
+        <button type="button" onClick={handleDownload}>
           Download
           <img src={loadCircleDuotone} alt="Circle Duotone" />
         </button>
