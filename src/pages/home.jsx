@@ -23,9 +23,8 @@ const Home = () => {
 
     const checkUrl = isUrlHttp(urlNormalized);
 
-    console.log(checkUrl)
-
     if(checkUrl) {
+      setUrl(urlNormalized);
       navigate("/qr");
     } else {
       setUrlError('URL is not valid');
