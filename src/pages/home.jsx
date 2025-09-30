@@ -40,6 +40,7 @@ const Home = () => {
           placeholder="Enter an url"
           value={url}
           onChange={e => setUrl(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
         />
         <button type="submit">QR code</button>
       </form>

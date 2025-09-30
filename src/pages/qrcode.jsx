@@ -43,6 +43,48 @@ const QrCode = () => {
     URL.revokeObjectURL(urlBlob);
   };
 
+  const handleShare = async (url) => {
+    const svg = document.getElementById("qrcode");
+
+    if (!svg) {
+      alert("No SVG found!");
+      return;
+    }
+
+    try {
+      const serializer = new XMLSerializer().serializeToString(svg);
+
+      const blob = new Blob([serializer], { type: "image/svg+xml" });
+      const file = new File([blob], "qrcode.svg", { type: "image/svg+xml" });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: "QR Code generated",
+          text: "See the attached QR Code",
+          files: [file],
+        });
+        return;
+      }
+    } catch (error) {
+      console.error("Error sharing image:", error);
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Link for QR Code generated",
+          text: "Here's the link:",
+          url: url,
+        });
+        return;
+      } catch (error) {
+        console.error("Error sharing link:", error);
+      }
+    } else {
+      alert("Sharing not supported in this browser. Try another one.");
+    }
+  };
+
   return (
     <>
     <HeaderContainer>
@@ -67,7 +109,7 @@ const QrCode = () => {
           Download
           <img src={loadCircleDuotone} alt="Circle Duotone" />
         </button>
-        <button type="button">
+        <button type="button" onClick={() => handleShare(url)}>
           Share
           <img src={linkAlt} alt="Link alt" />
         </button>
