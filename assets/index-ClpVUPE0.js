@@ -256,4 +256,4 @@ Please change the parent <Route path="${j}"> to <Route path="${j==="/"?"*":`${j}
     @media ( max-width: 40rem ) {
         font-size: .85rem;
     }
-`,nS=()=>rt.jsxs(Ep,{children:[rt.jsxs(Pg,{children:[rt.jsx(qf,{path:"/",element:rt.jsx(Bp,{})}),rt.jsx(qf,{path:"/qr",element:rt.jsx(Fp,{})})]}),rt.jsx(lS,{})]});function uS(){return rt.jsx("div",{children:rt.jsx(nS,{})})}nv.createRoot(document.getElementById("root")).render(rt.jsxs(H.StrictMode,{children:[rt.jsx(rg,{}),rt.jsx(uS,{})]}));
+`,nS=()=>rt.jsxs(Ep,{basename:"/qr-code-generator",children:[rt.jsxs(Pg,{children:[rt.jsx(qf,{path:"/",element:rt.jsx(Bp,{})}),rt.jsx(qf,{path:"/qr",element:rt.jsx(Fp,{})})]}),rt.jsx(lS,{})]});function uS(){return rt.jsx("div",{children:rt.jsx(nS,{})})}nv.createRoot(document.getElementById("root")).render(rt.jsxs(H.StrictMode,{children:[rt.jsx(rg,{}),rt.jsx(uS,{})]}));
