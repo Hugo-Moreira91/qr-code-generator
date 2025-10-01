@@ -5,7 +5,7 @@ import { Footer } from "../components/Footer";
 
 const AppRoutes = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/qr-code-generator">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/qr" element={<QrCode />} />
